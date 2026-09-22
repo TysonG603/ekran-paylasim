@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+<title>Ekran Paylaşım Odası</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div id="landing" class="screen">
+  <div class="landing-card">
+    <h1>Ekran Paylaşım Odası</h1>
+    <p class="subtitle">Özel bir oda aç, kodu arkadaşınla paylaş, birlikte film izleyin.</p>
+
+    <div class="option-box">
+      <h2>Ekranımı Paylaş</h2>
+      <p>Bilgisayardan oda oluştur, ekranını ve sesini paylaş.</p>
+      <button id="createBtn" class="btn primary">Oda Oluştur</button>
+    </div>
+
+    <div class="divider"><span>veya</span></div>
+
+    <div class="option-box">
+      <h2>Odaya Katıl</h2>
+      <p>Arkadaşının verdiği 6 haneli kodu gir.</p>
+      <div class="join-row">
+        <input id="roomCodeInput" type="text" maxlength="6" placeholder="ORN: A1B2C3" autocomplete="off" autocapitalize="characters" />
+        <button id="joinBtn" class="btn secondary">Katıl</button>
+      </div>
+    </div>
+
+    <p id="landingError" class="error-msg" hidden></p>
+  </div>
+</div>
+
+<div id="room" class="screen" hidden>
+  <header class="room-header">
+    <div class="room-info">
+      <span id="statusDot" class="status-dot"></span>
+      <span id="statusText">Bağlanıyor...</span>
+    </div>
+    <div id="roomCodeBox" class="room-code-box" hidden>
+      Oda Kodu: <strong id="roomCodeText"></strong>
+      <button id="copyBtn" class="btn tiny" title="Kodu kopyala">Kopyala</button>
+    </div>
+    <button id="leaveBtn" class="btn danger small">Ayrıl</button>
+  </header>
+
+  <main class="room-main">
+    <div class="video-area">
+      <video id="remoteVideo" autoplay playsinline></video>
+      <button id="fullscreenBtn" class="fullscreen-btn" title="Tam ekran">⛶</button>
+      <div id="localPreviewBox" class="local-preview-box" hidden>
+        <video id="localPreview" autoplay playsinline muted></video>
+        <span class="local-preview-label">Sen (paylaşıyorsun)</span>
+      </div>
+      <p id="waitingMsg" class="waiting-msg">Karşı tarafın bağlanması bekleniyor...</p>
+    </div>
+
+    <aside id="chatPanel" class="chat-panel">
+      <div class="chat-header">
+        <span>Sohbet</span>
+        <button id="closeChatBtn" class="btn tiny icon-only" title="Sohbeti kapat">✕</button>
+      </div>
+      <div id="chatMessages" class="chat-messages"></div>
+      <div class="chat-input-row">
+        <input id="chatInput" type="text" placeholder="Mesaj yaz..." autocomplete="off" maxlength="500" />
+        <button id="sendChatBtn" class="btn tiny">Gönder</button>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="controls-bar">
+    <button id="micBtn" class="ctrl-btn" title="Mikrofonu kapat/aç">🎤 Mikrofon</button>
+    <button id="stopShareBtn" class="ctrl-btn" hidden title="Ekran paylaşımını durdur">🖥️ Paylaşımı Durdur</button>
+    <button id="toggleChatBtn" class="ctrl-btn" title="Sohbeti göster/gizle">💬 Sohbet</button>
+  </footer>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
