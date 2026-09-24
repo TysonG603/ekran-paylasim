@@ -127,6 +127,13 @@ input[type="text"]:focus { outline: 2px solid var(--accent); }
 .btn.icon-only { padding: 4px 8px; }
 .btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
+.unsupported-msg {
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  margin: 10px 0 0;
+  line-height: 1.4;
+}
+
 .error-msg {
   color: var(--danger);
   font-size: 0.85rem;

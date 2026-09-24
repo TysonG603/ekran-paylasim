@@ -13,6 +13,7 @@ const createBtn = document.getElementById('createBtn');
 const joinBtn = document.getElementById('joinBtn');
 const roomCodeInput = document.getElementById('roomCodeInput');
 const landingError = document.getElementById('landingError');
+const unsupportedMsg = document.getElementById('unsupportedMsg');
 
 const statusDot = document.getElementById('statusDot');
 const statusText = document.getElementById('statusText');
@@ -48,7 +49,14 @@ let pendingCandidates = [];
 
 // ---- Landing actions ----
 
+const screenShareSupported = !!(navigator.mediaDevices && typeof navigator.mediaDevices.getDisplayMedia === 'function');
+if (!screenShareSupported) {
+  createBtn.disabled = true;
+  unsupportedMsg.hidden = false;
+}
+
 createBtn.addEventListener('click', async () => {
+  if (!screenShareSupported) return;
   clearError();
   setButtonsDisabled(true);
   try {
